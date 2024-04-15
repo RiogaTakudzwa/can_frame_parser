@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 class Car extends Equatable{
   final String make;
   final String model;
-  final String year;
+  final int year;
   final String transmission;
 
   const Car({

@@ -1,4 +1,5 @@
 import 'package:can_frame_parser/features/can_parser/presentation/screens/desktop/desktop_wrapper.dart';
+import 'package:can_frame_parser/features/can_parser/presentation/screens/mobile/screens/mobile_search_results.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,6 +18,10 @@ enum RoutePath{
   mobileHome(path: "/mobile_home"),
   tabletHome(path: "/tablet_home"),
   desktopHome(path: "/desktop_home"),
+
+  mobileSearchResults(path: "/mobile_search_results"),
+  tabletSearchResults(path: "/tablet_search_results"),
+  desktopSearchResults(path: "/desktop_search_results"),
 
   listMessagesMobile(path: "/list_messages_mobile"),
   listMessagesTablet(path: "/list_messages_tablet"),
@@ -47,44 +52,6 @@ abstract class AppPageRouter{
         path: RoutePath.screenController.path,
         name: RoutePath.screenController.name,
         builder: (context, state) => ScreenController(key: state.pageKey),
-        // routes: [
-          // Check to see if this works
-          // StatefulShellRoute.indexedStack(
-          //   builder: (context, state, navigationShellMobile){
-          //     return MobileWrapper(navigationShell: navigationShellMobile,);
-          //   },
-          //   branches: <StatefulShellBranch>[
-          //     StatefulShellBranch(
-          //         navigatorKey: homeNavigatorKey,
-          //         routes: <RouteBase>[
-          //           GoRoute(
-          //               path: RoutePath.mobileHome.path,
-          //               name: "MobileHome" ,
-          //               builder: (context, state) => MobileHome(key: state.pageKey),
-          //               routes: [
-          //                 // where you can go from home
-          //                 GoRoute(
-          //                     path: "subHome",
-          //                     name: "SubHome",
-          //                     pageBuilder: (context, state){
-          //                       return CustomTransitionPage(
-          //                           child: const ComingSoon(), // the actual screen
-          //                           transitionsBuilder: (context, animation, secondaryAnimation, child){
-          //                             return FadeTransition(
-          //                                 opacity: animation,
-          //                                 child: child
-          //                             );
-          //                           }
-          //                       );
-          //                     }
-          //                 ),
-          //               ]
-          //           ),
-          //         ]
-          //     ),
-          //   ],
-          // ),
-        // ]
       ),
 
       // Mobile Routes
@@ -99,16 +66,16 @@ abstract class AppPageRouter{
                 routes: <RouteBase>[
                   GoRoute(
                     path: RoutePath.mobileHome.path,
-                    name: "MobileHome" ,
+                    name: RoutePath.mobileHome.name ,
                     builder: (context, state) => MobileHome(key: state.pageKey),
                     routes: [
                       // where you can go from home
                       GoRoute(
-                        path: "subHome",
-                        name: "SubHome",
+                        path: RoutePath.mobileSearchResults.path,
+                        name: RoutePath.mobileSearchResults.path,
                         pageBuilder: (context, state){
                           return CustomTransitionPage(
-                            child: const ComingSoon(), // the actual screen
+                            child: const MobileSearchResults(), // the actual screen
                             transitionsBuilder: (context, animation, secondaryAnimation, child){
                               return FadeTransition(
                                 opacity: animation,

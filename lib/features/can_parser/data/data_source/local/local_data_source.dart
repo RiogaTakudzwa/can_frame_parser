@@ -7,10 +7,13 @@ import '../../../../../core/error_handling/failure.dart';
 import '../../../domain/entities/can_frame.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
+import '../../../domain/entities/car.dart';
 import '../../models/can_frame_model.dart';
+import '../../models/car_model.dart';
 
 abstract class CanFrameLocalDataSource{
   Future<List<CanFrameModel>> getLocalCanFrameData(String carDetails);
+  Future<List<CarModel>> getListOfAvailableCars(String carDetails);
 }
 
 class CanFrameLocalDataSourceImplementation extends CanFrameLocalDataSource{
@@ -29,6 +32,30 @@ class CanFrameLocalDataSourceImplementation extends CanFrameLocalDataSource{
         }
 
         return listOfFrames;
+
+      }on JsonParseException{
+        throw JsonParseException();
+      }
+
+    }on IOException{
+      throw  LocalIOException();
+    }
+  }
+
+  @override
+  Future<List<CarModel>> getListOfAvailableCars(String carDetails) async {
+    try{
+      final String response = await rootBundle.loadString(LocalPaths.carsListData);
+      List<CarModel> listOfCars = [];
+
+      try{
+        final jsonData = await json.decode(response);
+
+        for(Map<String, dynamic> car in jsonData["cars"]){
+          listOfCars.add(CarModel.fromJson(car));
+        }
+
+        return listOfCars;
 
       }on JsonParseException{
         throw JsonParseException();

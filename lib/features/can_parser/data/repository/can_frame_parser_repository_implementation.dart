@@ -8,6 +8,7 @@ import 'package:dartz/dartz.dart';
 
 import '../../../../core/error_handling/exception.dart';
 import '../models/can_frame_model.dart';
+import '../models/car_model.dart';
 
 class CanFrameParserRepositoryImplementation extends CanFrameParserRepository{
 
@@ -17,9 +18,19 @@ class CanFrameParserRepositoryImplementation extends CanFrameParserRepository{
   });
 
   @override
-  Future<Either<Failure, List<Car>>> getListOfAvailableCars() {
-    // TODO: implement getListOfAvailableCars
-    throw UnimplementedError();
+  Future<Either<Failure, List<Car>>> getListOfAvailableCars(String carDetails) async {
+    try{
+      List<CarModel> carModels = await canFrameLocalDataSource.getListOfAvailableCars(carDetails);
+      List<Car> carEntities = [];
+      for(CarModel model in carModels){
+        carEntities.add(model.toEntity());
+      }
+      return Right(carEntities);
+    }on LocalIOException{
+      return const Left(LocalIOFailure("Failed to load Local Data"));
+    }on JsonParseException{
+      return const Left(JsonParseFailure("Failed to parse Json Data"));
+    }
   }
 
   @override
@@ -40,7 +51,7 @@ class CanFrameParserRepositoryImplementation extends CanFrameParserRepository{
     }on LocalIOException{
       return const Left(LocalIOFailure("Failed to load Local Data"));
     }on JsonParseException{
-      return const Left(JsonParseFailure("Failed to parse Local Data"));
+      return const Left(JsonParseFailure("Failed to parse Json Data"));
     }
   }
 

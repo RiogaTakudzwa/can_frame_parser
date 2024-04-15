@@ -1,0 +1,16 @@
+{
+  "cars": [
+    {
+      "make": "VW",
+      "model": "Polo",
+      "year": 2017,
+      "transmission": "Manual"
+    },
+    {
+      "make": "Toyota",
+      "model": "Corolla",
+      "year": 2022,
+      "transmission": "Automatic"
+    }
+  ]
+}

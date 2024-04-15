@@ -10,11 +10,11 @@ abstract class CanFrameEvent extends Equatable {
 }
 
 class OnGetVehicleCaptureEvent extends CanFrameEvent {
-  final List<CanFrame> vehicleCaptureData;
-  const OnGetVehicleCaptureEvent(this.vehicleCaptureData);
+  final String currentVehicleDetails;
+  const OnGetVehicleCaptureEvent(this.currentVehicleDetails);
 
   @override
-  List<Object?> get props => [vehicleCaptureData];
+  List<Object?> get props => [currentVehicleDetails];
 }
 
 class OnFilterArbitrationIDEvent extends CanFrameEvent {

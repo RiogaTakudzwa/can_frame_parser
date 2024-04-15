@@ -21,3 +21,12 @@ class CanFrameDataLoadedState extends CanFrameState {
   @override
   List<Object?> get props => [vehicleCaptureData];
 }
+
+class ErrorLoadingCanFrameDataState extends CanFrameState {
+  final String errorMessage;
+
+  const ErrorLoadingCanFrameDataState(this.errorMessage);
+
+  @override
+  List<Object?> get props => [errorMessage];
+}
