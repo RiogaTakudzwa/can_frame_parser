@@ -49,7 +49,7 @@ class _MobileWrapperState extends State<MobileWrapper> {
             index,
             initialLocation: index == widget.navigationShell.currentIndex,
           );
-          if(mounted) setState(() {});
+          //if(mounted) setState(() {});
         },
         items: const [
           BottomNavigationBarItem(

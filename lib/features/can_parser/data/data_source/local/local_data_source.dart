@@ -13,7 +13,7 @@ import '../../models/car_model.dart';
 
 abstract class CanFrameLocalDataSource{
   Future<List<CanFrameModel>> getLocalCanFrameData(String carDetails);
-  Future<List<CarModel>> getListOfAvailableCars(String carDetails);
+  Future<List<CarModel>> getListOfAvailableCars();
 }
 
 class CanFrameLocalDataSourceImplementation extends CanFrameLocalDataSource{
@@ -21,14 +21,21 @@ class CanFrameLocalDataSourceImplementation extends CanFrameLocalDataSource{
   @override
   Future<List<CanFrameModel>> getLocalCanFrameData(String carDetails) async{
     try{
-      final String response = await rootBundle.loadString("${LocalPaths.vehicleCapturesData}$carDetails.json");
+      final String response = await rootBundle.loadString("${LocalPaths.vehicleCapturesData}$carDetails.log");
+      List<String> singleLines = const LineSplitter().convert(response);
+
       List<CanFrameModel> listOfFrames = [];
 
       try{
-        final jsonData = await json.decode(response);
+        for(String singleFrame in singleLines){
 
-        for(Map<String, dynamic> singleFrame in jsonData){
-          listOfFrames.add(CanFrameModel.fromJson(singleFrame));
+          var parts = singleFrame.split(RegExp(r'[# " "]'));
+          listOfFrames.add(CanFrameModel.fromJson({
+            "timestamp": double.parse(parts[0].substring(1, parts[0].length -1)),
+            "networkID": parts[1],
+            "arbitrationID": parts[2],
+            "dataFrame": parts[3].padRight(8, 'A'),
+          }));
         }
 
         return listOfFrames;
@@ -43,7 +50,7 @@ class CanFrameLocalDataSourceImplementation extends CanFrameLocalDataSource{
   }
 
   @override
-  Future<List<CarModel>> getListOfAvailableCars(String carDetails) async {
+  Future<List<CarModel>> getListOfAvailableCars() async {
     try{
       final String response = await rootBundle.loadString(LocalPaths.carsListData);
       List<CarModel> listOfCars = [];

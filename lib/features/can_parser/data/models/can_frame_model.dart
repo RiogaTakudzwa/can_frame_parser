@@ -3,7 +3,7 @@ import '../../domain/entities/can_frame.dart';
 class CanFrameModel extends CanFrame{
 
   const CanFrameModel({
-   required String timestamp,
+   required double timestamp,
    required String networkID,
    required String arbitrationID,
    required String dataFrame,
@@ -16,7 +16,7 @@ class CanFrameModel extends CanFrame{
 
   factory CanFrameModel.fromJson(Map<String, dynamic> json){
     return CanFrameModel(
-      timestamp: json["timestamp"] ?? "No Timestamp",
+      timestamp: json["timestamp"] ?? 0.0,
       networkID: json["networkID"] ?? "No Network ID",
       arbitrationID: json["arbitrationID"] ?? "No Arbitration ID",
       dataFrame: json["dataFrame"] ?? "No Data Frame",

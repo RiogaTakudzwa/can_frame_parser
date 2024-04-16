@@ -1,16 +1,22 @@
 {
   "cars": [
     {
-      "make": "VW",
-      "model": "Polo",
-      "year": 2017,
-      "transmission": "Manual"
+      "make": "Renault",
+      "model": "Megane",
+      "year": 2022,
+      "transmission": "Automatic"
     },
     {
       "make": "Toyota",
       "model": "Corolla",
       "year": 2022,
       "transmission": "Automatic"
+    },
+    {
+      "make": "Nissan",
+      "model": "HardBody",
+      "year": 2019,
+      "transmission": "Manual"
     }
   ]
 }

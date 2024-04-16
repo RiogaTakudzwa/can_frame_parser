@@ -18,7 +18,7 @@ class CarModel extends Car{
     return CarModel(
       make: json["make"] ?? "No Make",
       model: json["model"] ?? "No Model",
-      year: json["year"] ?? "No Year",
+      year: json["year"] ?? 0000,
       transmission: json["transmission"] ?? "No Transmission",
     );
   }

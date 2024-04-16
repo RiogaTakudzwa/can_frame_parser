@@ -24,3 +24,5 @@ class OnFilterArbitrationIDEvent extends CanFrameEvent {
   @override
   List<Object?> get props => [arbitrationID];
 }
+
+class OnGetListOfCarsEvent extends CanFrameEvent {}

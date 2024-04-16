@@ -18,16 +18,16 @@ class CanFrameParserRepositoryImplementation extends CanFrameParserRepository{
   });
 
   @override
-  Future<Either<Failure, List<Car>>> getListOfAvailableCars(String carDetails) async {
+  Future<Either<Failure, List<Car>>> getListOfAvailableCars() async {
     try{
-      List<CarModel> carModels = await canFrameLocalDataSource.getListOfAvailableCars(carDetails);
+      List<CarModel> carModels = await canFrameLocalDataSource.getListOfAvailableCars();
       List<Car> carEntities = [];
       for(CarModel model in carModels){
         carEntities.add(model.toEntity());
       }
       return Right(carEntities);
     }on LocalIOException{
-      return const Left(LocalIOFailure("Failed to load Local Data"));
+      return const Left(LocalIOFailure("Failed to load Local Data. Please check if vehicle capture data exists"));
     }on JsonParseException{
       return const Left(JsonParseFailure("Failed to parse Json Data"));
     }
@@ -49,7 +49,7 @@ class CanFrameParserRepositoryImplementation extends CanFrameParserRepository{
       }
       return Right(frameEntities);
     }on LocalIOException{
-      return const Left(LocalIOFailure("Failed to load Local Data"));
+      return const Left(LocalIOFailure("Failed to load Local Data. Please check if vehicle capture data exists"));
     }on JsonParseException{
       return const Left(JsonParseFailure("Failed to parse Json Data"));
     }

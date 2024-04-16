@@ -1,5 +1,4 @@
-import 'package:can_frame_parser/features/can_parser/presentation/screens/desktop/desktop_wrapper.dart';
-import 'package:can_frame_parser/features/can_parser/presentation/screens/mobile/screens/mobile_search_results.dart';
+import 'package:can_frame_parser/features/can_parser/presentation/screens/mobile/screens/mobile_frame_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
@@ -8,7 +7,6 @@ import '../../../features/can_parser/presentation/screens/mobile/mobile_wrapper.
 import '../../../features/can_parser/presentation/screens/mobile/screens/mobile_details.dart';
 import '../../../features/can_parser/presentation/screens/mobile/screens/mobile_home.dart';
 import '../../../features/can_parser/presentation/screens/shared/coming_soon.dart';
-import '../../../features/can_parser/presentation/screens/tablet/tablet_wrapper.dart';
 
 enum RoutePath{
   root(path: "/"),
@@ -19,9 +17,9 @@ enum RoutePath{
   tabletHome(path: "/tablet_home"),
   desktopHome(path: "/desktop_home"),
 
-  mobileSearchResults(path: "/mobile_search_results"),
-  tabletSearchResults(path: "/tablet_search_results"),
-  desktopSearchResults(path: "/desktop_search_results"),
+  mobileFrameData(path: "mobile_frame_data"),
+  tabletFrameData(path: "tablet_frame_data"),
+  desktopFrameData(path: "desktop_frame_data"),
 
   listMessagesMobile(path: "/list_messages_mobile"),
   listMessagesTablet(path: "/list_messages_tablet"),
@@ -71,11 +69,11 @@ abstract class AppPageRouter{
                     routes: [
                       // where you can go from home
                       GoRoute(
-                        path: RoutePath.mobileSearchResults.path,
-                        name: RoutePath.mobileSearchResults.path,
+                        path: RoutePath.mobileFrameData.path,
+                        name: RoutePath.mobileFrameData.name,
                         pageBuilder: (context, state){
                           return CustomTransitionPage(
-                            child: const MobileSearchResults(), // the actual screen
+                            child: const MobileFrameData(), // the actual screen
                             transitionsBuilder: (context, animation, secondaryAnimation, child){
                               return FadeTransition(
                                 opacity: animation,
@@ -126,8 +124,6 @@ abstract class AppPageRouter{
 
       // Desktop Routes
       // Apply as above
-
-
 
     ]
   );

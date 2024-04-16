@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class CanFrame extends Equatable{
-  final String timestamp;
+  final double timestamp;
   final String networkID;
   final String arbitrationID;
   final String dataFrame;
