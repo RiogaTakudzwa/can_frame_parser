@@ -45,6 +45,7 @@ abstract class AppPageRouter{
 
       // General navigation that isn't in a shell/has bottom navigation
       // Add any other route you want to go to directly
+
       GoRoute(
         parentNavigatorKey: rootNavigatorKey,
         path: RoutePath.screenController.path,
@@ -65,22 +66,14 @@ abstract class AppPageRouter{
                   GoRoute(
                     path: RoutePath.mobileHome.path,
                     name: RoutePath.mobileHome.name ,
-                    builder: (context, state) => MobileHome(key: state.pageKey),
+                    builder: (context, state) => const MobileHome(),
                     routes: [
                       // where you can go from home
                       GoRoute(
                         path: RoutePath.mobileFrameData.path,
                         name: RoutePath.mobileFrameData.name,
-                        pageBuilder: (context, state){
-                          return CustomTransitionPage(
-                            child: const MobileFrameData(), // the actual screen
-                            transitionsBuilder: (context, animation, secondaryAnimation, child){
-                              return FadeTransition(
-                                opacity: animation,
-                                child: child
-                              );
-                            }
-                          );
+                        builder: (context, state){
+                          return const MobileFrameData();
                         }
                       ),
                     ]

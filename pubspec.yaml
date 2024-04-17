@@ -43,6 +43,7 @@ dependencies:
   google_nav_bar: ^5.0.6
   get_it: ^7.7.0
   rxdart: ^0.27.7
+  yaml: ^3.1.2
 
 dev_dependencies:
   flutter_test:
@@ -70,7 +71,8 @@ flutter:
   assets:
    - assets/coming_soon/
    - assets/data_files/
-   - assets/data_files/parse_sheets/
+   - assets/data_files/parsing_tables/
+   - assets/data_files/parsing_tables/isuzu_dmax_2021_manual/
    - assets/data_files/vehicle_captures/
 
   # An image asset can refer to one or more resolution-specific "variants", see

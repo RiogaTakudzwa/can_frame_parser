@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-import '../../domain/entities/can_frame.dart';
-import '../../domain/entities/car.dart';
+import '../../../domain/entities/can_frame.dart';
+import '../../../domain/entities/car.dart';
 
 abstract class CanFrameState extends Equatable {
   const CanFrameState();
@@ -33,25 +33,3 @@ class ErrorLoadingCanFrameDataState extends CanFrameState {
   List<Object?> get props => [errorMessage];
 }
 
-/// Loading list of Cars
-class EmptyListOfCarsState extends CanFrameState {}
-
-class LoadingListOfCarsState extends CanFrameState {}
-
-class ListOfCarsLoadedState extends CanFrameState {
-  final List<Car> listOfCars;
-
-  const ListOfCarsLoadedState(this.listOfCars);
-
-  @override
-  List<Object?> get props => [listOfCars];
-}
-
-class ErrorLoadingListOfCarsState extends CanFrameState {
-  final String errorMessage;
-
-  const ErrorLoadingListOfCarsState(this.errorMessage);
-
-  @override
-  List<Object?> get props => [errorMessage];
-}

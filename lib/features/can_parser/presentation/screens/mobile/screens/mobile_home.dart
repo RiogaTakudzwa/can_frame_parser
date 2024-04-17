@@ -1,9 +1,10 @@
+import 'package:can_frame_parser/features/can_parser/presentation/bloc/car_list_bloc/car_list_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../bloc/can_frame_bloc.dart';
-import '../../../bloc/can_frame_event.dart';
-import '../../../bloc/can_frame_state.dart';
+import '../../../bloc/can_frames_bloc/can_frame_bloc.dart';
+import '../../../bloc/can_frames_bloc/can_frame_event.dart';
+import '../../../bloc/can_frames_bloc/can_frame_state.dart';
 import '../../../widgets/mobile_home/car_result.dart';
 
 class MobileHome extends StatefulWidget {
@@ -21,7 +22,7 @@ class _MobileHomeState extends State<MobileHome> {
 
     // After building, call the bloc to fetch list of cars
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      context.read<CanFrameBloc>().add(OnGetListOfCarsEvent());
+      context.read<CarListBloc>().add(OnGetListOfCarsEvent());
     });
   }
 
@@ -40,7 +41,7 @@ class _MobileHomeState extends State<MobileHome> {
             ),
           ),
         ),
-        body: BlocBuilder<CanFrameBloc, CanFrameState>(
+        body: BlocBuilder<CarListBloc, CarListState>(
           builder: (context, state) {
             if (state is LoadingListOfCarsState) {
               return const CircularProgressIndicator(
@@ -75,7 +76,11 @@ class _MobileHomeState extends State<MobileHome> {
                 ),
               );
             } else {
-              return const SizedBox();
+              return const Center(
+                child: Text(
+                  "No state was emitted"
+                ),
+              );
             }
           },
         ),

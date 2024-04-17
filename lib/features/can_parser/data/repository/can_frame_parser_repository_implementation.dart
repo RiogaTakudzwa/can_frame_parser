@@ -7,8 +7,10 @@ import 'package:can_frame_parser/features/can_parser/domain/repositories/can_fra
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error_handling/exception.dart';
+import '../../domain/entities/parsing_table.dart';
 import '../models/can_frame_model.dart';
 import '../models/car_model.dart';
+import '../models/parsing_table_model.dart';
 
 class CanFrameParserRepositoryImplementation extends CanFrameParserRepository{
 
@@ -34,9 +36,28 @@ class CanFrameParserRepositoryImplementation extends CanFrameParserRepository{
   }
 
   @override
-  Future<Either<Failure, ParsingSheet>> getParsingSheet(String carDetails) {
-    // TODO: implement getParsingSheet
-    throw UnimplementedError();
+  Future<Either<Failure, List<Map<String, List<ParsingTable>>>>> getParsingTables(String carDetails) async {
+    try{
+      List<Map<String, List<ParsingTableModel>>> table = await canFrameLocalDataSource.getListOfParsingTables(carDetails);
+      List<Map<String, List<ParsingTable>>> parsingTableEntities = [];
+
+      for(Map<String, List<ParsingTableModel>> model in table){
+        Map<String, List<ParsingTable>> temp = {};
+        List<ParsingTable> tempModelList = [];
+
+        for(ParsingTableModel singleModel in model[model.keys.first]!){
+          tempModelList.add(singleModel.toEntity());
+        }
+
+        temp.addAll({model.keys.first: tempModelList});
+        parsingTableEntities.add(temp);
+      }
+      return Right(parsingTableEntities);
+    }on LocalIOException{
+      return const Left(LocalIOFailure("Failed to load Local Data. Please check if vehicle capture data exists"));
+    }on JsonParseException{
+      return const Left(JsonParseFailure("Failed to parse Json Data"));
+    }
   }
 
   @override

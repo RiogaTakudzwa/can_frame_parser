@@ -1,7 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-import '../../domain/entities/can_frame.dart';
-
 abstract class CanFrameEvent extends Equatable {
   const CanFrameEvent();
 
@@ -25,4 +23,3 @@ class OnFilterArbitrationIDEvent extends CanFrameEvent {
   List<Object?> get props => [arbitrationID];
 }
 
-class OnGetListOfCarsEvent extends CanFrameEvent {}

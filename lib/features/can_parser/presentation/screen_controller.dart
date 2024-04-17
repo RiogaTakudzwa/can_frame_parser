@@ -34,13 +34,17 @@ class _ScreenControllerState extends State<ScreenController> {
           future: navigateToHomeScreen,
           builder: (context, snapshot){
 
-            if(constraints.maxWidth > 1300){
-              WidgetsBinding.instance.addPostFrameCallback((_) => context.go('/desktop_home'));
-            } else if(constraints.maxWidth > 600 && constraints.maxWidth < 1300){
-              WidgetsBinding.instance.addPostFrameCallback((_) => context.go('/tablet_home'));
-            }else{
-              print("Going to Mobile Home");
-              WidgetsBinding.instance.addPostFrameCallback((_) => context.go('/mobile_home'));
+            if(snapshot.hasData){
+              if(snapshot.data == true) {
+                if(constraints.maxWidth > 1300){
+                  WidgetsBinding.instance.addPostFrameCallback((_) => context.go('/desktop_home'));
+                } else if(constraints.maxWidth > 600 && constraints.maxWidth < 1300){
+                  WidgetsBinding.instance.addPostFrameCallback((_) => context.go('/tablet_home'));
+                }else{
+                  print("Going to Mobile Home");
+                  WidgetsBinding.instance.addPostFrameCallback((_) => context.go('/mobile_home'));
+                }
+              }
             }
 
             return const SplashScreen();
