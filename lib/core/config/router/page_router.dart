@@ -4,28 +4,33 @@ import 'package:go_router/go_router.dart';
 
 import '../../../features/can_parser/presentation/screen_controller.dart';
 import '../../../features/can_parser/presentation/screens/mobile/mobile_wrapper.dart';
+import '../../../features/can_parser/presentation/screens/mobile/screens/mobile_available_modules.dart';
 import '../../../features/can_parser/presentation/screens/mobile/screens/mobile_details.dart';
 import '../../../features/can_parser/presentation/screens/mobile/screens/mobile_home.dart';
 import '../../../features/can_parser/presentation/screens/shared/coming_soon.dart';
 
 enum RoutePath{
-  root(path: "/"),
-
   screenController(path: "/"),
 
+  ////////////////////////////////////
   mobileHome(path: "/mobile_home"),
   tabletHome(path: "/tablet_home"),
   desktopHome(path: "/desktop_home"),
 
+  mobileAvailableModules(path: "mobile_available_modules"),
+  tabletAvailableModules(path: "tablet_available_modules"),
+  desktopAvailableModules(path: "desktop_available_modules"),
+
   mobileFrameData(path: "mobile_frame_data"),
   tabletFrameData(path: "tablet_frame_data"),
   desktopFrameData(path: "desktop_frame_data"),
-
+  ////////////////////////////////////
   listMessagesMobile(path: "/list_messages_mobile"),
   listMessagesTablet(path: "/list_messages_tablet"),
   listMessagesDesktop(path: "/list_messages_desktop"),
 
   arbitrationIDsMobile(path: "/arbitration_IDs_mobile");
+  ////////////////////////////////////
 
   const RoutePath({required this.path});
   final String path;
@@ -70,11 +75,20 @@ abstract class AppPageRouter{
                     routes: [
                       // where you can go from home
                       GoRoute(
-                        path: RoutePath.mobileFrameData.path,
-                        name: RoutePath.mobileFrameData.name,
+                        path: RoutePath.mobileAvailableModules.path,
+                        name: RoutePath.mobileAvailableModules.name,
                         builder: (context, state){
-                          return const MobileFrameData();
-                        }
+                          return const MobileAvailableModules();
+                        },
+                        routes: [
+                          GoRoute(
+                            path: RoutePath.mobileFrameData.path,
+                            name: RoutePath.mobileFrameData.name,
+                            builder: (context, state){
+                              return const MobileFrameData();
+                            },
+                          ),
+                        ]
                       ),
                     ]
                   ),

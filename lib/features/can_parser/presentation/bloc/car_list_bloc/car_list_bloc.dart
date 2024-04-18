@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 
 import '../../../domain/entities/car.dart';
 import '../../../domain/usecases/get_list_of_available_cars.dart';

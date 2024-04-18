@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/config/router/page_router.dart';
 import 'core/config/theme/app_theme.dart';
 import 'features/can_parser/presentation/bloc/car_list_bloc/car_list_bloc.dart';
+import 'features/can_parser/presentation/bloc/pasring_table/parsing_table_bloc.dart';
 import 'injection_container.dart';
 
 void main() {
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => locator<CanFrameBloc>()),
         BlocProvider(create: (_) => locator<CarListBloc>()),
+        BlocProvider(create: (_) => locator<ParsingTableBloc>()),
       ],
       child: MaterialApp.router(
         title: 'Flutter Demo',

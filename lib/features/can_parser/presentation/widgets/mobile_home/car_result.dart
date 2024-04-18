@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../bloc/can_frames_bloc/can_frame_bloc.dart';
 import '../../bloc/can_frames_bloc/can_frame_event.dart';
+import '../../bloc/pasring_table/parsing_table_bloc.dart';
 
 class CarResult extends StatelessWidget {
   final String make;
@@ -23,11 +24,11 @@ class CarResult extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        context.read<CanFrameBloc>().add(OnGetVehicleCaptureEvent(
-          "${make}_${model}_${year}_${transmission}"
+        context.read<ParsingTableBloc>().add(OnGetParsingTablesEvent(
+          carDetails: "${make}_${model}_${year}_${transmission}"
         ));
 
-        context.push("/mobile_home/mobile_frame_data");
+        context.push("/mobile_home/mobile_available_modules");
       },
       child: Container(
         padding: const EdgeInsets.all(20),

@@ -28,7 +28,7 @@ class MobileFrameData extends StatelessWidget {
           ),
           leading: IconButton(
             onPressed: (){
-              context.go("/mobile_home");
+              context.go("/mobile_home/mobile_available_modules");
 
               // After building, call the bloc to fetch list of cars
               // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {

@@ -84,8 +84,11 @@ class CanFrameLocalDataSourceImplementation extends CanFrameLocalDataSource{
   Future<List<Map<String, List<ParsingTableModel>>>> getListOfParsingTables(String carDetails) async {
     try{
       final parsingTablesInFolder = json.decode(await rootBundle.loadString('AssetManifest.json')).keys
-          .where((String key) => key.contains("${LocalPaths.yamlFiles}/$carDetails/"))
+          .where((String key) => key.contains("${LocalPaths.yamlFiles}${carDetails.toLowerCase()}/"))
           .toList();
+      for(String item in parsingTablesInFolder){
+        print(item);
+      }
 
       List<Map<String, List<ParsingTableModel>>> parsingTableModels = [];
 
@@ -102,7 +105,7 @@ class CanFrameLocalDataSourceImplementation extends CanFrameLocalDataSource{
             tempList.add(ParsingTableModel.fromJson(tableItem));
           }
 
-          var parts = tablePath.split(RegExp(r'[/ .]'));
+          var parts = tablePath.split(RegExp(r'[/.]'));
 
           temp.addAll({parts.elementAt(parts.length -2): tempList});
           parsingTableModels.add(temp);

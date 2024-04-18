@@ -1,10 +1,10 @@
 {
   "cars": [
     {
-      "make": "Renault",
-      "model": "Megane",
-      "year": 2022,
-      "transmission": "Automatic"
+      "make": "Isuzu",
+      "model": "DMax",
+      "year": 2021,
+      "transmission": "Manual"
     },
     {
       "make": "Toyota",
